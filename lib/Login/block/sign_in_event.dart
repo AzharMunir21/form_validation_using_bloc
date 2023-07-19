@@ -11,10 +11,12 @@ class SignInTextChangeEvent extends SignEvents {
 }
 
 class SignInSubmittedEvent extends SignEvents {
-  final String? email;
-  final String? password;
+  final String email;
+  final String password;
   SignInSubmittedEvent({
-    this.email,
-    this.password,
+    required this.email,
+    required this.password,
   });
 }
+
+class SignInErrorEvent extends SignEvents {}

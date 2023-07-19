@@ -12,11 +12,15 @@ class SignInBlock extends Bloc<SignEvents, SignInState> {
       } else if (event.passwordValue.length < 8) {
         emit(SignInErrorState(errorMessage: "Please enter a valid password"));
       } else {
-        emit(SignInInvalidState());
+        emit(SignInValidState());
       }
     });
     on<SignInSubmittedEvent>((event, emit) {
-      emit(SignInLoadingState());
+      if (event.password.length >= 8 && EmailValidator.validate(event.email)) {
+        emit(SignInLoadingState());
+      } else {
+        emit(SignInInvalidState());
+      }
     });
   }
 }
